@@ -13,6 +13,7 @@ final class CharacterListViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     private let tableView = UITableView()
+    private let activityIndicatorView = UIActivityIndicatorView(style: .large)
     private let disposeBag = DisposeBag()
     
     private let viewModel: CharacterListViewModelProtocol
@@ -24,6 +25,7 @@ final class CharacterListViewController: UIViewController {
         self.imageProvider = imageProvider
         super.init(nibName: nil, bundle: nil)
     }
+    
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
@@ -47,11 +49,16 @@ final class CharacterListViewController: UIViewController {
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.reuseIdentifier)
         view.addSubview(tableView)
         
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate(
+            [tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+             tableView.topAnchor.constraint(equalTo: view.topAnchor),
+             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+             activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+             activityIndicatorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)])
     }
     
     private func bindUI() {
@@ -71,5 +78,12 @@ final class CharacterListViewController: UIViewController {
             .map { _ in false }
             .bind(to: searchController.rx.isActive)
             .disposed(by: disposeBag)
+        
+        viewModel.outputs.isLoading.drive(onNext: { [weak self] isLoading in
+            guard let self = self else { return }
+            self.tableView.isHidden = isLoading
+            self.activityIndicatorView.isHidden = !isLoading
+            isLoading ? self.activityIndicatorView.startAnimating() : self.activityIndicatorView.stopAnimating()
+        }).disposed(by: disposeBag)
     }
 }
