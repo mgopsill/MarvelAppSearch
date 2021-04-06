@@ -52,6 +52,17 @@ final class CharacterListViewControllerTests: XCTestCase {
         navigationController.overrideUserInterfaceStyle = .dark
         assertSnapshot(matching: navigationController, as: .image)
     }
+    
+    func testLoadingList() {
+        let subject = CharacterListViewController(viewModel: MockCharacterListViewModel(isLoading: .just(true)), imageProvider: MockImageProvider())
+        assertSnapshot(matching: subject, as: .image)
+    }
+    
+    func testLoadingListDarkMode() {
+        let subject = CharacterListViewController(viewModel: MockCharacterListViewModel(isLoading: .just(true)), imageProvider: MockImageProvider())
+        subject.overrideUserInterfaceStyle = .dark
+        assertSnapshot(matching: subject, as: .image)
+    }
 }
 
 final class MockCharacterListViewModel: CharacterListViewModelProtocol {
@@ -59,10 +70,12 @@ final class MockCharacterListViewModel: CharacterListViewModelProtocol {
     let outputs: CharacterListViewModel.Outputs
     
     init(marvelCharacters: Driver<[MarvelCharacter]> = .just([]),
-         didSelectCharacter: Driver<MarvelCharacter> = .never()) {
+         didSelectCharacter: Driver<MarvelCharacter> = .never(),
+         isLoading: Driver<Bool> = .never()) {
         inputs = CharacterListViewModel.Inputs(search: BehaviorSubject<String?>(value: nil).asObserver(),
                                                selectCharacter: PublishSubject<MarvelCharacter>().asObserver())
         outputs = CharacterListViewModel.Outputs(marvelCharacters: marvelCharacters,
-                                                 didSelectCharacter: didSelectCharacter)
+                                                 didSelectCharacter: didSelectCharacter,
+                                                 isLoading: isLoading)
     }
 }

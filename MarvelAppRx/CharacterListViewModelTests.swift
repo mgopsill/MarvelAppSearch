@@ -28,6 +28,7 @@ final class CharacterListViewModelTests: XCTestCase {
         let outputs = test(search: [.next(0, nil), .next(10, "")])
         XCTAssertEqual(outputs.marvelCharacters.events, [])
         XCTAssertTrue(outputs.searchedStrings.isEmpty)
+        XCTAssertEqual(outputs.isLoading.events, [.next(0, false)])
     }
     
     func testSearchDistinctUntilChanged() {
@@ -38,6 +39,8 @@ final class CharacterListViewModelTests: XCTestCase {
         XCTAssertEqual(outputs.marvelCharacters.events, [.next(1, [])])
         XCTAssertEqual(outputs.searchedStrings[0], "Th")
         XCTAssertEqual(outputs.searchedStrings.count, 1)
+        XCTAssertEqual(outputs.isLoading.events, [.next(0, false),
+                                                  .next(1, true)])
     }
     
     func testSelectCharacter() {
@@ -51,6 +54,9 @@ final class CharacterListViewModelTests: XCTestCase {
                            apiResult: .just([character]))
         XCTAssertEqual(outputs.marvelCharacters.events, [.next(1, []),
                                                          .next(1, [character])])
+        XCTAssertEqual(outputs.isLoading.events, [.next(0, false),
+                                                  .next(1, true),
+                                                  .next(1, false)])
     }
     
     func testAPIFails() {
@@ -58,11 +64,16 @@ final class CharacterListViewModelTests: XCTestCase {
         let outputs = test(search: [.next(0, "Th")],
                            apiResult: .error(MockError()))
         XCTAssertEqual(outputs.marvelCharacters.events, [.next(1, []),
-                                                         .next(1, [])])
+                                                         .next(1, []),
+                                                         .completed(1)])
+        XCTAssertEqual(outputs.isLoading.events, [.next(0, false),
+                                                  .next(1, true),
+                                                  .next(1, false)])
     }
     
     private typealias Outputs = (marvelCharacters: TestableObserver<[MarvelCharacter]>,
                                  didSelectCharacter: TestableObserver<MarvelCharacter>,
+                                 isLoading: TestableObserver<Bool>,
                                  searchedStrings: [String])
     
     private func test(search: [Recorded<Event<String?>>] = [],
@@ -72,6 +83,7 @@ final class CharacterListViewModelTests: XCTestCase {
 
         let charactersObserver = scheduler.createObserver([MarvelCharacter].self)
         let didSelectCharacterObserver = scheduler.createObserver(MarvelCharacter.self)
+        let isLoadingObserver = scheduler.createObserver(Bool.self)
         
         var searchedStrings: [String] = []
         let mockAPI: (String) -> Observable<[MarvelCharacter]> = { search in
@@ -86,11 +98,13 @@ final class CharacterListViewModelTests: XCTestCase {
     
         subject.outputs.marvelCharacters.drive(charactersObserver).disposed(by: disposeBag)
         subject.outputs.didSelectCharacter.drive(didSelectCharacterObserver).disposed(by: disposeBag)
-        
+        subject.outputs.isLoading.drive(isLoadingObserver).disposed(by: disposeBag)
+
         scheduler.start()
         
         return (charactersObserver,
                 didSelectCharacterObserver,
+                isLoadingObserver,
                 searchedStrings)
     }
 }
