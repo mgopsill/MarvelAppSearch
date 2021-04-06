@@ -21,5 +21,5 @@ Architecture:
 
 
 Todo:
-- loading state and network activity indicator
-- error state / handling for failed network calls 
+- [x] loading state and network activity indicator
+- [ ] error state / handling for failed network calls 
