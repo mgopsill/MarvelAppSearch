@@ -1,3 +1,5 @@
+![build and test state](https://github.com/mgopsill/marvelappsearch/actions/workflows/xcode-build-test.yml/badge.svg)
+
 # MarvelAppSearch
 
 App to Search and Favourite Marvel Characters featuring: 
