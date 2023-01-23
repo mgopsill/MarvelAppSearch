@@ -1,4 +1,4 @@
-![build and test state](https://github.com/mgopsill/marvelappsearch/actions/workflows/xcode-build-test.yml/badge.svg)
+![build and test state](https://github.com/mgopsill/marvelappsearch/actions/workflows/xcode-build-test.yml/badge.svg) 
 
 # MarvelAppSearch
 
