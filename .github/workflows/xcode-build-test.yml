@@ -6,13 +6,30 @@ on:
     - main
     
 jobs:
-  build:
-    runs-on: macos-latest
+  test:
+    # Job name is Test
+    name: Test
+    # This job runs on macOS
+    runs-on: macOS-latest
     strategy:
       matrix:
-        platform:
-          - iOS
+        destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 14']
+        xcode: ['/Applications/Xcode_14.2.app/Contents/Developer']
     steps:
-      - uses: mxcl/xcodebuild@v1
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Bundle Install
+        run: bundle install
+        env:
+          BUNDLE_GITHUB__COM: x-access-token:${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+      - name: Build and test
+        run: bundle exec fastlane scan --destination "${destination}" --scheme "MarvelAppRx"
+        env:
+          destination: ${{ matrix.destination }}
+          DEVELOPER_DIR: ${{ matrix.xcode }}
+      - name: Archive Failed Tests artifacts
+        if: failure()
+        uses: actions/upload-artifact@v1
         with:
-          platform: ${{ matrix.platform }}
+          name: FailureDiff
+          path: MarvelAppRxTests/FailureDiffs
