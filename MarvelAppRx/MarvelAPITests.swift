@@ -24,12 +24,12 @@ final class MarvelAPITests: XCTestCase {
     }
     
     func testURLRequestComposition() throws {
-        let request = MarvelAPI.charactersRequest(for: "Thor")
+        let request = try MarvelAPI.charactersRequest(for: "Thor", configuration: MockConfiguration(shouldError: false)).toBlocking().single()
         let url = try XCTUnwrap(request.url)
         let components = try XCTUnwrap(URLComponents(url: url, resolvingAgainstBaseURL: false))
         
         XCTAssertEqual(components.queryItems?["orderBy"], "name")
-        XCTAssertEqual(components.queryItems?["apikey"], "***REMOVED***")
+        XCTAssertEqual(components.queryItems?["apikey"], "test")
         XCTAssertEqual(components.queryItems?["hash"], "3198f9adf083cfa42049f8e6cb4fdfb9")
         XCTAssertEqual(components.queryItems?["ts"], "1617340573")
         XCTAssertEqual(components.host, "gateway.marvel.com")
@@ -37,10 +37,16 @@ final class MarvelAPITests: XCTestCase {
         XCTAssertEqual(components.scheme, "https")
     }
     
+    func testURLRequestCompositionFails() throws {
+        XCTAssertThrowsError(try MarvelAPI.charactersRequest(for: "Thor", configuration: MockConfiguration(shouldError: true)).toBlocking().single()) { error in
+            XCTAssertEqual(error as? Configuration.Error, Configuration.Error.missingKey)
+        }
+    }
+    
     func testSuccessfulFetch() throws {
         TestURLProtocol.mockResponses[endpointURL] = { _ in (.success(MarvelAPI.sampleResponse), 200) }
 
-        let result = try MarvelAPI.searchCharacters(with: "Thor").toBlocking().single()
+        let result = try MarvelAPI.searchCharacters(with: "Thor", configuration: MockConfiguration(shouldError: false)).toBlocking().single()
         XCTAssertEqual(result.count, 20)
         XCTAssertEqual(result[0].name, "3-D Man")
         XCTAssertEqual(result[0].description, "")
@@ -73,4 +79,12 @@ extension Array where Element == URLQueryItem {
   fileprivate subscript(_ name: String) -> String? {
     first(where: { $0.name == name }).flatMap { $0.value }
   }
+}
+
+struct MockConfiguration: ConfigurationProtocol {
+    let shouldError: Bool
+    func apiKey() throws -> String {
+        guard !shouldError else { throw Configuration.Error.missingKey }
+        return "test"
+    }
 }

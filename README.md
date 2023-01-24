@@ -8,6 +8,8 @@
 
 # MarvelAppSearch Demo App
 
+> Requires an api key from https://www.marvel.com/signin?referer=https%3A%2F%2Fdeveloper.marvel.com%2Faccount in xcconfig file
+ 
 App to Search and Favourite Marvel Characters featuring: 
 
 - Search for characters (searches debounced every 400ms to reduce API use)

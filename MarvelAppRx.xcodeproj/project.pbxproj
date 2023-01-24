@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0C02F5297FCE03000FB98C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C02F4297FCE03000FB98C /* Configuration.swift */; };
+		4D0C02F7297FCE12000FB98C /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C02F6297FCE12000FB98C /* ConfigurationTests.swift */; };
 		4D300AC42618A01D00AB509A /* FavouritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D300AC32618A01D00AB509A /* FavouritesListViewController.swift */; };
 		4D300ACA2618A02D00AB509A /* FavouritesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D300AC92618A02D00AB509A /* FavouritesListViewModel.swift */; };
 		4D615D442618A4DF00C86C0D /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D615D432618A4DF00C86C0D /* CoordinatorFactory.swift */; };
@@ -63,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D0C02F3297FC92C000FB98C /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		4D0C02F4297FCE03000FB98C /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		4D0C02F6297FCE12000FB98C /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
 		4D300AC32618A01D00AB509A /* FavouritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesListViewController.swift; sourceTree = "<group>"; };
 		4D300AC92618A02D00AB509A /* FavouritesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesListViewModel.swift; sourceTree = "<group>"; };
 		4D615D432618A4DF00C86C0D /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
@@ -142,6 +147,7 @@
 		4DDEE6BD2616E3C300B68B7D = {
 			isa = PBXGroup;
 			children = (
+				4D0C02F3297FC92C000FB98C /* Development.xcconfig */,
 				4DDEE6C82616E3C300B68B7D /* MarvelAppRx */,
 				4DDEE6EE2616F34A00B68B7D /* MarvelAppRxTests */,
 				4DDEE6C72616E3C300B68B7D /* Products */,
@@ -162,43 +168,45 @@
 		4DDEE6C82616E3C300B68B7D /* MarvelAppRx */ = {
 			isa = PBXGroup;
 			children = (
-				4DDEE7232616F9AC00B68B7D /* Protocols */,
 				4DDEE6C92616E3C300B68B7D /* AppDelegate.swift */,
 				4DDEE6E12616E42A00B68B7D /* AppTabBarController.swift */,
 				4DDEE6F92616F37400B68B7D /* AppTabBarControllerTests.swift */,
-				4D9780A52617572100052E8F /* CharacterResponseModel.swift */,
-				4D615D4F2619C50300C86C0D /* CharacterResponseModelTests.swift */,
+				4DDEE6D22616E3C400B68B7D /* Assets.xcassets */,
 				4D97816026185AE400052E8F /* CharacterCellViewModel.swift */,
 				4D615D532619C7E500C86C0D /* CharacterCellViewModelTests.swift */,
-				4D97816A2618839600052E8F /* CharacterDetailViewModel.swift */,
-				4D615D612619E06000C86C0D /* CharacterDetailViewModelTests.swift */,
 				4D9781702618840600052E8F /* CharacterDetailViewController.swift */,
 				4D615D6E261A209000C86C0D /* CharacterDetailViewControllerTests.swift */,
+				4D97816A2618839600052E8F /* CharacterDetailViewModel.swift */,
+				4D615D612619E06000C86C0D /* CharacterDetailViewModelTests.swift */,
 				4D9781392617684200052E8F /* CharacterListViewController.swift */,
 				4D615D6A261A207A00C86C0D /* CharacterListViewControllerTests.swift */,
 				4D97813D2617A04A00052E8F /* CharacterListViewModel.swift */,
 				4D615DAF261C21DB00C86C0D /* CharacterListViewModelTests.swift */,
+				4D9780A52617572100052E8F /* CharacterResponseModel.swift */,
+				4D615D4F2619C50300C86C0D /* CharacterResponseModelTests.swift */,
 				4D97815A26185AC300052E8F /* CharacterTableViewCell.swift */,
+				4D0C02F4297FCE03000FB98C /* Configuration.swift */,
+				4D0C02F6297FCE12000FB98C /* ConfigurationTests.swift */,
 				4D615D432618A4DF00C86C0D /* CoordinatorFactory.swift */,
 				4D615D72261AF28300C86C0D /* CoordinatorFactoryTests.swift */,
+				4D615D472618A50300C86C0D /* FavouritesCoordinator.swift */,
+				4D615D84261B00E100C86C0D /* FavouritesCoordinatorTests.swift */,
 				4D300AC32618A01D00AB509A /* FavouritesListViewController.swift */,
 				4D615D7B261AF3F700C86C0D /* FavouritesListViewControllerTests.swift */,
 				4D300AC92618A02D00AB509A /* FavouritesListViewModel.swift */,
 				4D615DA6261B948700C86C0D /* FavouritesListViewModelTests.swift */,
-				4D615D472618A50300C86C0D /* FavouritesCoordinator.swift */,
-				4D615D84261B00E100C86C0D /* FavouritesCoordinatorTests.swift */,
 				4D97817E261891BF00052E8F /* FavouritesManager.swift */,
 				4D615D98261B54D100C86C0D /* FavouritesManagerTests.swift */,
 				4D97816426185B0D00052E8F /* ImageProvider.swift */,
 				4D615D92261B4FFD00C86C0D /* ImageProviderTests.swift */,
+				4DDEE6D72616E3C400B68B7D /* Info.plist */,
+				4DDEE6D42616E3C400B68B7D /* LaunchScreen.storyboard */,
 				4DDEE7242616F9DE00B68B7D /* ListCoordinator.swift */,
 				4D615D88261B041000C86C0D /* ListCoordinatorTests.swift */,
 				4D9780922617088200052E8F /* MarvelAPI.swift */,
 				4D9780B52617586300052E8F /* MarvelAPITests.swift */,
+				4DDEE7232616F9AC00B68B7D /* Protocols */,
 				4DDEE6CB2616E3C300B68B7D /* SceneDelegate.swift */,
-				4DDEE6D22616E3C400B68B7D /* Assets.xcassets */,
-				4DDEE6D42616E3C400B68B7D /* LaunchScreen.storyboard */,
-				4DDEE6D72616E3C400B68B7D /* Info.plist */,
 			);
 			path = MarvelAppRx;
 			sourceTree = "<group>";
@@ -453,6 +461,7 @@
 				4D9781712618840600052E8F /* CharacterDetailViewController.swift in Sources */,
 				4D9780932617088200052E8F /* MarvelAPI.swift in Sources */,
 				4D97813E2617A04A00052E8F /* CharacterListViewModel.swift in Sources */,
+				4D0C02F5297FCE03000FB98C /* Configuration.swift in Sources */,
 				4D97816526185B0D00052E8F /* ImageProvider.swift in Sources */,
 				4DDEE6CC2616E3C300B68B7D /* SceneDelegate.swift in Sources */,
 			);
@@ -477,6 +486,7 @@
 				4D615DB0261C21DB00C86C0D /* CharacterListViewModelTests.swift in Sources */,
 				4D9780BA2617588500052E8F /* TestURLProtocol.swift in Sources */,
 				4D615D6B261A207A00C86C0D /* CharacterListViewControllerTests.swift in Sources */,
+				4D0C02F7297FCE12000FB98C /* ConfigurationTests.swift in Sources */,
 				4D615D78261AF28800C86C0D /* CoordinatorFactoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,13 +634,13 @@
 		};
 		4DDEE6DB2616E3C400B68B7D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEEE1735FE670FC8FC01036C /* Pods-MarvelAppRx.debug.xcconfig */;
+			baseConfigurationReference = 4D0C02F3297FC92C000FB98C /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EYT7Q6838H;
-				ENABLE_TESTING_SEARCH_PATHS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = NO;
 				INFOPLIST_FILE = MarvelAppRx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -651,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EYT7Q6838H;
-				ENABLE_TESTING_SEARCH_PATHS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = NO;
 				INFOPLIST_FILE = MarvelAppRx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -671,6 +681,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EYT7Q6838H;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = MarvelAppRxTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -692,6 +703,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EYT7Q6838H;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = MarvelAppRxTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

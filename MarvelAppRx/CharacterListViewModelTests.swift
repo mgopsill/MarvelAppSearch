@@ -86,12 +86,14 @@ final class CharacterListViewModelTests: XCTestCase {
         let isLoadingObserver = scheduler.createObserver(Bool.self)
         
         var searchedStrings: [String] = []
-        let mockAPI: (String) -> Observable<[MarvelCharacter]> = { search in
+        let mockAPI: (String, ConfigurationProtocol) -> Observable<[MarvelCharacter]> = { search, _ in
             searchedStrings.append(search)
             return apiResult
         }
         
-        let subject = CharacterListViewModel(marvelAPI: mockAPI, scheduler: scheduler)
+        let subject = CharacterListViewModel(marvelAPI: mockAPI,
+                                             scheduler: scheduler,
+                                             configuration: MockConfiguration(shouldError: false))
         
         scheduler.createColdObservable(search).bind(to: subject.inputs.search).disposed(by: disposeBag)
         scheduler.createColdObservable(selectCharacter).bind(to: subject.inputs.selectCharacter).disposed(by: disposeBag)

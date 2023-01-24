@@ -28,8 +28,9 @@ struct CharacterListViewModel: CharacterListViewModelProtocol {
         let isLoading: Driver<Bool>
     }
     
-    init(marvelAPI: @escaping (String) -> Observable<[MarvelCharacter]> = MarvelAPI.searchCharacters,
-         scheduler: SchedulerType = MainScheduler.instance) {
+    init(marvelAPI: @escaping (String, ConfigurationProtocol) -> Observable<[MarvelCharacter]> = MarvelAPI.searchCharacters,
+         scheduler: SchedulerType = MainScheduler.instance,
+         configuration: ConfigurationProtocol = Configuration()) {
         let searchInput = PublishSubject<String?>()
         let selectCharacterInput = PublishSubject<MarvelCharacter>()
         let isLoadingSubject = BehaviorSubject<Bool>(value: false)
@@ -41,7 +42,7 @@ struct CharacterListViewModel: CharacterListViewModelProtocol {
             .filter { !$0.isEmpty }
             .flatMapLatest { string -> Observable<[MarvelCharacter]> in
                 isLoadingSubject.onNext(true)
-                return marvelAPI(string)
+                return marvelAPI(string, configuration)
                     .do(onNext: { _ in isLoadingSubject.onNext(false) },
                         onError: { _ in isLoadingSubject.onNext(false) })
                     .startWith([]) // clears results on new search term
