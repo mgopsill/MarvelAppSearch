@@ -2,10 +2,7 @@
 <img src="images/logo.png" height="70" />	
 
 <br />
-<a href="https://github.com/mgopsill/MarvelAppSearch/actions/workflows/xcode-build-test.yml" target="_blank"><img src="https://github.com/mgopsill/marvelappsearch/actions/workflows/xcode-build-test.yml/badge.svg" alt="Build Status" /></a>
-
-<a href="https://codecov.io/gh/mgopsill/marvelappsearch" target="_blank"><img src="https://codecov.io/gh/mgopsill/marvelappsearch/branch/main/graph/badge.svg" alt="Code Coverage" /></a>
-
+<a href="https://github.com/mgopsill/MarvelAppSearch/actions/workflows/xcode-build-test.yml" target="_blank"><img src="https://github.com/mgopsill/marvelappsearch/actions/workflows/xcode-build-test.yml/badge.svg" alt="Build Status" /></a> <a href="https://codecov.io/gh/mgopsill/marvelappsearch" target="_blank"><img src="https://codecov.io/gh/mgopsill/marvelappsearch/branch/main/graph/badge.svg" alt="Code Coverage" /></a>
 <br />
 </p>
 
