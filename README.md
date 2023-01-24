@@ -1,17 +1,28 @@
-![build and test state](https://github.com/mgopsill/marvelappsearch/actions/workflows/xcode-build-test.yml/badge.svg) 
+<p align="center">
+<img src="images/logo.png" height="70" />	
 
-# MarvelAppSearch
+<br />
+<a href="https://github.com/mgopsill/MarvelAppSearch/actions/workflows/xcode-build-test.yml" target="_blank"><img src="https://github.com/mgopsill/marvelappsearch/actions/workflows/xcode-build-test.yml/badge.svg" alt="Build Status" /></a>
+
+<a href="https://codecov.io/gh/mgopsill/marvelappsearch" target="_blank"><img src="https://codecov.io/gh/mgopsill/marvelappsearch/branch/main/graph/badge.svg" alt="Code Coverage" /></a>
+
+<br />
+</p>
+
+# MarvelAppSearch Demo App
 
 App to Search and Favourite Marvel Characters featuring: 
+
 - Search for characters (searches debounced every 400ms to reduce API use)
 - Simple in-memory cache for images
 - Favourite characters cached and retrieved using `UserDefaults` and encoded JSON
 - Link outs to favourite marvel characters
 - Swipe to delete from Favourites list
 
-<img src="example.gif" width="250" height="580" />
+<img src="images/example.gif" width="250" height="580" />
 
 Architecture: 
+
 - MVVM-C
 - `RxSwift` used. It should be easy to bridge to `Combine` but I find testing `Rx` easier, at least until `Combine` has better testing and virtual time support.
 - `UIKit`. Should be fairly easy to jump to `SwiftUI` and `Combine`.
