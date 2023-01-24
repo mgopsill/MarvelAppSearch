@@ -31,6 +31,8 @@ jobs:
         env:
           destination: ${{ matrix.destination }}
           DEVELOPER_DIR: ${{ matrix.xcode }}
+      - name: Generate coverage
+        run: bundle exec fastlane run slather
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
           

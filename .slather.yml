@@ -1,0 +1,9 @@
+# .slather.yml
+
+coverage_service: cobertura_xml
+xcodeproj: ./MarvelAppRx.xcodeproj
+workspace: ./MarvelAppRx.xcworkspace
+scheme: MarvelAppRx
+output_directory: ./coverage_report/
+ignore:
+  - Pods/
